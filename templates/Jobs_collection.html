@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- <link rel="stylesheet" href="{{url_for('static', filename='header.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='section.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='aside.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='footer.css')}}"> -->
+
+    <link rel="icon" type="image/png" sizes="16x16" href="{{url_for('static', filename='favicon.png')}}">
+    <!-- favicon.ico파일을 현재 html이 있는 파일 경로에 다운받고
+                              href="/favicon.ico?1"로 되어있는데 ./favicon으로 바꾸어 준다.
+                              .은 현재 폴더라는 뜻이다.  -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
+
+    <!--글씨체-->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static', filename='header.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='section_page1.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='section_page2.css')}}">
+    <!-- Bootstrap CSS -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            news_readey();
+            console.log('준비완료')
+        });
+
+
+        function news_readey() {
+            $('#recruit_news').empty()
+            $.ajax({
+                type: "GET",
+                url: "/api/news",
+                data: {},
+                success: function (response) {
+                    let news_card = response['news_card'];
+                    for (let i = 0; i < news_card.length; i++) {
+                        let r_news_card = news_card[i]
+
+                        let news_content = r_news_card['news_content']
+                        let news_link = r_news_card['news_link']
+                        let news_img = r_news_card['news_img']
+                        let news_title = r_news_card['news_title']
+
+                        let temp_html = `<div id="news_box">
+                                          <a href="${news_link}" class="news_class">
+                                              <div id="news_img">
+                                                 <img src="${news_img}"
+                                                  class="" width="178" height="120" onerror="this.parentNode.style.display='none';">
+                                             </div>
+        
+                                         <div id="news_title">
+                                              ${news_title}
+                                        </div>
+                                          <div id="news_content">
+                                            ${news_content}
+                                         </div>
+                                        </a>
+                                    </div>`;
+                        $('#recruit_news').append(temp_html);
+                    }
+                }
+            })
+        }</script>
+
+
+
+
+    <!-- <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="section_page1.css">
+    <link rel="stylesheet" href="section_page2.css"> -->
+
+
+
+    <title>Jobs Collection</title>
+</head>
+
+<body>
+    <header>
+
+        <div id="header_bar">
+
+
+            <!-- <img src="heart.png" width="29" height="29"> -->
+            <h1 class="window_reload_js"> Collection Jobs</h1>
+
+            <h5 class="Like_show" alt="찜 목록으로 가기">Like List</h2>
+                <!-- <h5 class="Indeed_show">Indeed</h5>
+            <h5 class="Saramin_show">Saram-in</h5>
+            <h5 class="JobKorea_show">Job-Korea</h5>
+            <h5 class="Total_show">Total</h5> -->
+
+
+        </div>
+
+        <div id="header_input">
+            <div id="input_div">
+
+
+                <input class="input_company" placeholder="검색어 입력" />
+
+                <select class="input_potal">
+                    <option>전체 (포탈 선택)</option>
+                    <option>Job-korea</option>
+                    <option>Saram-in</option>
+                    <option>Indeed</option>
+                </select>
+
+                <select class="input_location">
+                    <option>전체(희망 지역)</option>
+                    <option>서울</option>
+                    <option>경기</option>
+                    <option>인천</option>
+                    <option>부산</option>
+                    <option>대구</option>
+                    <option>광주</option>
+                    <option>대전</option>
+                    <option>울산</option>
+                    <option>세종</option>
+                    <option>강원</option>
+                    <option>경남</option>
+                    <option>경북</option>
+                    <option>전남</option>
+                    <option>전북</option>
+                    <option>충남</option>
+                    <option>충북</option>
+                    <option>제주</option>
+                </select>
+
+                <select class="input_jobtype">
+                    <option>전체(근무 형태)</option>
+                    <option>정규직</option>
+                    <option>계약직</option>
+                    <option>인턴</option>
+                    <option>아르바이트</option>
+                    <option>병역특례</option>
+                </select>
+
+                <button class="search_btn">
+                    검색
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section>
+        <div id="section_total" class="hiding_class">
+
+            <div id="recruit_info">
+                <div id="recruit_info_box">
+                    <h2><strong>전체 포탈의 채용정보</strong></h2>
+                </div>
+                <div id="recruit_info_number">
+                    <h4>채용정보 갯수</h4>
+                </div>
+            </div>
+
+            <div id="total_recruit_info">
+
+                <div id="recruit_post">
+                    <div id="company_name">
+                        <a href="https://www.naver.com" class="a_companys_name">
+                            <strong>
+                                에이비씨디이에프테크놀로지지지지지지지지지
+                            </strong>
+                        </a>
+                    </div>
+                    <div id="recruit_post_info">
+                        <div id="position_name">
+                            <span>
+                                데이터 엔지니어로 성장하고 싶은 Python Backend
+                            </span>
+                        </div>
+                        <div id="other_name">
+                            <div id="location_name">
+                                <span> 위치 : 경기</span>
+                            </div>
+                            <div id="income_name">
+                                <span> 연봉 : 3000 ~ 5000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="recruit_post_link">
+
+                        <div id="support_btn">
+                            <a href="">
+                                <button>지원하기</button>
+                            </a>
+                        </div>
+
+                        <div id="like_btn">
+                            <a href="">
+                                <button class="pink_btn">찜</button>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <div id="recruit_post">
+                    <div id="company_name">
+                        <a href="https://www.naver.com" class="a_companys_name">
+                            <strong>
+                                취업시켜줄게
+                            </strong>
+                        </a>
+                    </div>
+                    <div id="recruit_post_info">
+                        <div id="position_name">
+                            <span>
+                                열심히 한번 해보자
+                            </span>
+                        </div>
+                        <div id="other_name">
+                            <div id="location_name">
+                                <span> 위치 : 서울</span>
+                            </div>
+                            <div id="income_name">
+                                <span> 연봉 : 4000 ~ 6000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="recruit_post_link">
+                        <div id="support_btn">
+                            <a href="">
+                                <button>지원하기</button>
+                            </a>
+                        </div>
+
+                        <div id="like_btn">
+                            <a href="">
+                                <button class="pink_btn">찜</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+<!-- 
+        <div id="section_Job_Korea" class="hiding_class">
+
+            <div id="recruit_info">
+                <div id="recruit_info_box">
+                    <h2><strong>Job-Korea의 채용정보</strong></h2>
+                </div>
+                <div id="recruit_info_number">
+                    <h4>채용정보 갯수</h4>
+                </div>
+            </div>
+
+            <div id="total_recruit_info">
+                <div id="recruit_post">
+                    <div id="company_name">
+                        <a href="https://www.naver.com" class="a_companys_name">
+                            <strong>
+                                에이비씨디이에프테크놀로지지지지지지지지지
+                            </strong>
+                        </a>
+                    </div>
+                    <div id="recruit_post_info">
+                        <div id="position_name">
+                            <span>
+                                데이터 엔지니어로 성장하고 싶은 Python Backend
+                            </span>
+                        </div>
+                        <div id="other_name">
+                            <div id="location_name">
+                                <span> 위치 : 경기</span>
+                            </div>
+                            <div id="income_name">
+                                <span> 연봉 : 3000 ~ 5000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="recruit_post_link">
+
+                        <div id="support_btn">
+                            <a href="">
+                                <button>지원하기</button>
+                            </a>
+                        </div>
+
+                        <div id="like_btn">
+                            <a href="">
+                                <button class="pink_btn">찜</button>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="total_recruit_info">
+                <div id="recruit_post">
+                    <div id="company_name">
+                        <a href="https://www.naver.com" class="a_companys_name">
+                            <strong>
+                                취업시켜줄게
+                            </strong>
+                        </a>
+                    </div>
+                    <div id="recruit_post_info">
+                        <div id="position_name">
+                            <span>
+                                열심히 한번 해보자
+                            </span>
+                        </div>
+                        <div id="other_name">
+                            <div id="location_name">
+                                <span> 위치 : 서울</span>
+                            </div>
+                            <div id="income_name">
+                                <span> 연봉 : 4000 ~ 6000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="recruit_post_link">
+                        <div id="support_btn">
+                            <a href="">
+                                <button>지원하기</button>
+                            </a>
+                        </div>
+
+                        <div id="like_btn">
+                            <a href="">
+                                <button class="pink_btn">찜</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="section_Saramin" class="hiding_class">
+
+            <div id="recruit_info">
+                <div id="recruit_info_box">
+                    <h2><strong>Saram-in 채용정보</strong></h2>
+                </div>
+                <div id="recruit_info_number">
+                    <h4>채용정보 갯수</h4>
+                </div>
+            </div>
+
+            <div id="total_recruit_info">
+                <div id="recruit_post">
+                    <div id="company_name">
+                        <a href="https://www.naver.com" class="a_companys_name">
+                            <strong>
+                                에이비씨디이에프테크놀로지지지지지지지지지
+                            </strong>
+                        </a>
+                    </div>
+                    <div id="recruit_post_info">
+                        <div id="position_name">
+                            <span>
+                                데이터 엔지니어로 성장하고 싶은 Python Backend
+                            </span>
+                        </div>
+                        <div id="other_name">
+                            <div id="location_name">
+                                <span> 위치 : 경기</span>
+                            </div>
+                            <div id="income_name">
+                                <span> 연봉 : 3000 ~ 5000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="recruit_post_link">
+
+                        <div id="support_btn">
+                            <a href="">
+                                <button>지원하기</button>
+                            </a>
+                        </div>
+
+                        <div id="like_btn">
+                            <a href="">
+                                <button class="pink_btn">찜</button>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="total_recruit_info">
+                <div id="recruit_post">
+                    <div id="company_name">
+                        <a href="https://www.naver.com" class="a_companys_name">
+                            <strong>
+                                취업시켜줄게
+                            </strong>
+                        </a>
+                    </div>
+                    <div id="recruit_post_info">
+                        <div id="position_name">
+                            <span>
+                                열심히 한번 해보자
+                            </span>
+                        </div>
+                        <div id="other_name">
+                            <div id="location_name">
+                                <span> 위치 : 서울</span>
+                            </div>
+                            <div id="income_name">
+                                <span> 연봉 : 4000 ~ 6000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="recruit_post_link">
+                        <div id="support_btn">
+                            <a href="">
+                                <button>지원하기</button>
+                            </a>
+                        </div>
+
+                        <div id="like_btn">
+                            <a href="">
+                                <button class="pink_btn">찜</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="section_Indeed" class="hiding_class">
+
+            <div id="recruit_info">
+                <div id="recruit_info_box">
+                    <h2><strong>Indeed 채용정보</strong></h2>
+                </div>
+                <div id="recruit_info_number">
+                    <h4>채용정보 갯수</h4>
+                </div>
+            </div>
+
+            <div id="total_recruit_info">
+                <div id="recruit_post">
+                    <div id="company_name">
+                        <a href="https://www.naver.com" class="a_companys_name">
+                            <strong>
+                                에이비씨디이에프테크놀로지지지지지지지지지
+                            </strong>
+                        </a>
+                    </div>
+                    <div id="recruit_post_info">
+                        <div id="position_name">
+                            <span>
+                                데이터 엔지니어로 성장하고 싶은 Python Backend
+                            </span>
+                        </div>
+                        <div id="other_name">
+                            <div id="location_name">
+                                <span> 위치 : 경기</span>
+                            </div>
+                            <div id="income_name">
+                                <span> 연봉 : 3000 ~ 5000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="recruit_post_link">
+
+                        <div id="support_btn">
+                            <a href="">
+                                <button>지원하기</button>
+                            </a>
+                        </div>
+
+                        <div id="like_btn">
+                            <a href="">
+                                <button class="pink_btn">찜</button>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="total_recruit_info">
+                <div id="recruit_post">
+                    <div id="company_name">
+                        <a href="https://www.naver.com" class="a_companys_name">
+                            <strong>
+                                취업시켜줄게
+                            </strong>
+                        </a>
+                    </div>
+                    <div id="recruit_post_info">
+                        <div id="position_name">
+                            <span>
+                                열심히 한번 해보자
+                            </span>
+                        </div>
+                        <div id="other_name">
+                            <div id="location_name">
+                                <span> 위치 : 서울</span>
+                            </div>
+                            <div id="income_name">
+                                <span> 연봉 : 4000 ~ 6000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="recruit_post_link">
+                        <div id="support_btn">
+                            <a href="">
+                                <button>지원하기</button>
+                            </a>
+                        </div>
+
+                        <div id="like_btn">
+                            <a href="">
+                                <button class="pink_btn">찜</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+
+
+        <div id="hot_jobs">
+            <div id="recruit_info">
+                <div id="recruit_info_box">
+                    <h2> 오늘의 취업 관련 뉴스</h2>
+                </div>
+                <div id="recruit_news">
+                    <div id="news_box">
+                        <a href="" class="news_class">
+                            <div id="news_img">
+                                <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F030%2F2020%2F06%2F08%2F2886752.jpg"
+                                    class="" width="178" height="120" onerror="this.parentNode.style.display='none';">
+                            </div>
+
+                            <div id="news_title">
+                                [HotJobs 100] 비즈니스피플이 엄선한 오늘의 채용-6월8일
+                            </div>
+                            <div id="news_content">
+                                오늘의 HOT JOBS 100 더 보기 : www.bzpp.co.kr/recruit/HotJobs 전문 경력직 채용포털 비즈니스피플이 채용정보를 소개한다.
+                                HotJobs 100은 비즈니스피플이 국내 채용정보 가운데 가장 주목할 만한 자리 100개를 선정해 제공하는...
+                            </div>
+                        </a>
+                    </div>
+
+                    <div id="news_box">
+                        <a href="" class="news_class">
+                            <div id="news_img">
+                                <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F030%2F2020%2F06%2F08%2F2886752.jpg"
+                                    class="" width="178" height="120" onerror="this.parentNode.style.display='none';">
+                            </div>
+
+                            <div id="news_title">
+                                [HotJobs 100] 비즈니스피플이 엄선한 오늘의 채용-6월8일
+                            </div>
+                            <div id="news_content">
+                                오늘의 HOT JOBS 100 더 보기 : www.bzpp.co.kr/recruit/HotJobs 전문 경력직 채용포털 비즈니스피플이 채용정보를 소개한다.
+                                HotJobs 100은 비즈니스피플이 국내 채용정보 가운데 가장 주목할 만한 자리 100개를 선정해 제공하는...
+                            </div>
+                        </a>
+                    </div>
+
+                    <div id="news_box">
+                        <a href="" class="news_class">
+                            <div id="news_img">
+                                <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F030%2F2020%2F06%2F08%2F2886752.jpg"
+                                    class="" width="178" height="120" onerror="this.parentNode.style.display='none';">
+                            </div>
+
+                            <div id="news_title">
+                                [HotJobs 100] 비즈니스피플이 엄선한 오늘의 채용-6월8일
+                            </div>
+                            <div id="news_content">
+                                오늘의 HOT JOBS 100 더 보기 : www.bzpp.co.kr/recruit/HotJobs 전문 경력직 채용포털 비즈니스피플이 채용정보를 소개한다.
+                                HotJobs 100은 비즈니스피플이 국내 채용정보 가운데 가장 주목할 만한 자리 100개를 선정해 제공하는...
+                            </div>
+                        </a>
+                    </div>
+
+                    <div id="news_box">
+                        <a href="" class="news_class">
+                            <div id="news_img">
+                                <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F030%2F2020%2F06%2F08%2F2886752.jpg"
+                                    class="" width="178" height="120" onerror="this.parentNode.style.display='none';">
+                            </div>
+
+                            <div id="news_title">
+                                [HotJobs 100] 비즈니스피플이 엄선한 오늘의 채용-6월8일
+                            </div>
+                            <div id="news_content">
+                                오늘의 HOT JOBS 100 더 보기 : www.bzpp.co.kr/recruit/HotJobs 전문 경력직 채용포털 비즈니스피플이 채용정보를 소개한다.
+                                HotJobs 100은 비즈니스피플이 국내 채용정보 가운데 가장 주목할 만한 자리 100개를 선정해 제공하는...
+                            </div>
+                        </a>
+                    </div>
+
+                    <div id="news_box">
+                        <a href="" class="news_class">
+                            <div id="news_img">
+                                <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F030%2F2020%2F06%2F08%2F2886752.jpg"
+                                    class="" width="178" height="120" onerror="this.parentNode.style.display='none';">
+                            </div>
+
+                            <div id="news_title">
+                                [HotJobs 100] 비즈니스피플이 엄선한 오늘의 채용-6월8일
+                            </div>
+                            <div id="news_content">
+                                오늘의 HOT JOBS 100 더 보기 : www.bzpp.co.kr/recruit/HotJobs 전문 경력직 채용포털 비즈니스피플이 채용정보를 소개한다.
+                                HotJobs 100은 비즈니스피플이 국내 채용정보 가운데 가장 주목할 만한 자리 100개를 선정해 제공하는...
+                            </div>
+                        </a>
+                    </div>
+
+                    <div id="news_box">
+                        <a href="" class="news_class">
+                            <div id="news_img">
+                                <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F030%2F2020%2F06%2F08%2F2886752.jpg"
+                                    class="" width="178" height="120" onerror="this.parentNode.style.display='none';">
+                            </div>
+
+                            <div id="news_title">
+                                [HotJobs 100] 비즈니스피플이 엄선한 오늘의 채용-6월8일
+                            </div>
+                            <div id="news_content">
+                                오늘의 HOT JOBS 100 더 보기 : www.bzpp.co.kr/recruit/HotJobs 전문 경력직 채용포털 비즈니스피플이 채용정보를 소개한다.
+                                HotJobs 100은 비즈니스피플이 국내 채용정보 가운데 가장 주목할 만한 자리 100개를 선정해 제공하는...
+                            </div>
+                        </a>
+                    </div>
+
+                    <div id="news_box">
+                        <a href="" class="news_class">
+                            <div id="news_img">
+                                <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F030%2F2020%2F06%2F08%2F2886752.jpg"
+                                    class="" width="178" height="120" onerror="this.parentNode.style.display='none';">
+                            </div>
+
+                            <div id="news_title">
+                                [HotJobs 100] 비즈니스피플이 엄선한 오늘의 채용-6월8일
+                            </div>
+                            <div id="news_content">
+                                오늘의 HOT JOBS 100 더 보기 : www.bzpp.co.kr/recruit/HotJobs 전문 경력직 채용포털 비즈니스피플이 채용정보를 소개한다.
+                                HotJobs 100은 비즈니스피플이 국내 채용정보 가운데 가장 주목할 만한 자리 100개를 선정해 제공하는...
+                            </div>
+                        </a>
+                    </div>
+
+                    <div id="news_box">
+                        <a href="" class="news_class">
+                            <div id="news_img">
+                                <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F030%2F2020%2F06%2F08%2F2886752.jpg"
+                                    class="" width="178" height="120" onerror="this.parentNode.style.display='none';">
+                            </div>
+
+                            <div id="news_title">
+                                [HotJobs 100] 비즈니스피플이 엄선한 오늘의 채용-6월8일
+                            </div>
+                            <div id="news_content">
+                                오늘의 HOT JOBS 100 더 보기 : www.bzpp.co.kr/recruit/HotJobs 전문 경력직 채용포털 비즈니스피플이 채용정보를 소개한다.
+                                HotJobs 100은 비즈니스피플이 국내 채용정보 가운데 가장 주목할 만한 자리 100개를 선정해 제공하는...
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+        </div>
+
+    </section>
+
+    <aside>
+
+    </aside>
+
+    <footer>
+
+    </footer>
+
+    <!-- <script src="reload.js"></script>
+    <script src="news.js"></script>
+    <script src="search.js"></script> -->
+    <script src="{{ url_for('static', filename='search.js')}}"></script>
+    <script src="{{ url_for('static', filename='reload.js')}}"></script>
+    <!-- <script src="{{ url_for('static', filename='news.js')}}"></script> -->
+</body>
+
+</html>

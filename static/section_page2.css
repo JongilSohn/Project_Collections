@@ -1,0 +1,152 @@
+*{
+    box-sizing: border-box;
+    
+}
+section{
+    margin: 0 auto;
+    width: 1080px;
+    /* background-color: #e5e6eb; */
+    font-family: 'Malgun Gothic';
+}
+
+#section_total{
+    width: 880px;
+              /*섹션의 전체 높이를 임의로 지정해놓음.*/
+    margin: 50px 100px 0px 100px;
+    background-color: white;
+}
+
+#section_Job_Korea{
+    width: 880px;
+             /*섹션의 전체 높이를 임의로 지정해놓음.*/
+    margin: 50px 100px 0px 100px;
+    background-color: white;
+}
+
+#section_Saramin{
+    width: 880px;
+           /*섹션의 전체 높이를 임의로 지정해놓음.*/
+    margin: 50px 100px 0px 100px;
+    background-color: white;
+}
+
+#section_Indeed{
+    width: 880px;
+             /*섹션의 전체 높이를 임의로 지정해놓음.*/
+    margin: 50px 100px 0px 100px;
+    background-color: white;
+}
+
+
+
+#recruit_info{
+    height: 100px;
+}
+
+#recruit_info_box{
+    height: 70px;
+    display: inline-block;
+}
+#recruit_info_box >h2{
+    margin: 20px 0px 0px 20px;
+    vertical-align: middle;
+}
+
+#recruit_info_number{
+    height: 30px;
+    
+}
+
+#recruit_info_number >h4{
+    margin: 0px 0px 0px 20px;
+}
+
+#recruit_post{
+    width: 880px;
+    height: 90px;
+    border: 1px solid #dae1e6;
+
+}
+
+/* #recruit_post_info{
+    width: 50%;
+    height: 120px;
+    margin: 25px 40px 25px 100px;
+    float: left;
+
+} */
+
+#recruit_post_link{
+    width: 98px;
+    height: 90px;
+
+    border-left: 0.1px solid #dae1e6;
+    display: inline-block;
+    text-align: center;
+}
+
+#support_btn{
+    height: 25px;
+    margin: 15px 0px 10px;
+    border: none;
+}
+
+.pink_btn{
+    color:#fff;
+    background-color: #f8585b;
+    border: none;
+    height: 25px;
+}
+
+
+#like_btn{
+    height: 25px;
+    margin: 15px 0px 10px;
+}
+
+#company_name{
+    width: 180px;
+    height: 40px;
+    display: inline-block;
+    float: left;
+
+    text-align: center;
+    margin: 25px 0px 25px 20px;
+}
+.a_companys_name{
+    text-decoration: none;
+    color: black;
+}
+
+#position_name{
+    width: 460px;
+    height: 25px;
+    display: inline-block;
+    float: left;
+    margin: 10px 60px 10px 60px;
+
+}
+
+#other_name{
+    width: 460px;
+    height: 25px;
+    display: inline-block;
+    float: left;
+    margin: 10px 60px 10px 60px;
+}
+
+#location_name{
+    display: inline-block;
+    float: left;
+    font-size: 13px;
+    width: 150px;
+}
+
+#income_name{
+    display: inline-block;
+    float: left;
+    margin-left: 20px;
+    font-size: 13px;
+    width: 240px;
+}
+

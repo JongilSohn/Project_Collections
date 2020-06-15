@@ -1,0 +1,142 @@
+*{
+    box-sizing: border-box;
+}
+
+#header_bar{
+    margin: 0 auto;
+    height: 60px;
+    background-color: black;
+    font-family: 'Balsamiq Sans', cursive;
+}
+
+#main_bar{
+    width: 100%;
+    height: 250px;
+}
+
+.window_reload_js{
+    display: inline-block;
+    margin: 10px 0px 0px 50px;
+    color: white;
+}
+
+.Indeed_show{
+    display: inline-block;
+    margin: 18px 60px 0px 60px;
+    float: right;
+    color: white;
+}
+
+.Saramin_show{
+    display: inline-block;
+    margin: 18px 60px 0px 60px;
+    float: right;
+    color: white;
+}
+
+.JobKorea_show{
+    display: inline-block;
+    margin: 18px 60px 0px 60px;
+    float: right;
+    color: white;
+}
+
+.Total_show{
+    display: inline-block;
+    margin: 18px 60px 0px 60px;
+    float: right;
+    color: white;
+}
+
+.Like_show{
+    display: inline-block;
+    margin: 18px 60px 0px 60px;
+    float: right;
+    color:  #f8585b;
+    text-align: center;
+}
+
+/* header{
+    margin: 0 auto;
+    width: 1080px;
+    height: 350px;
+} */
+
+#header_logo{
+    width: 100%;
+    height: 250px;
+    background-image: url("8.jpg");
+}
+
+#header_input{
+    margin: 0 auto;
+    width: 1019px;
+    height: 70px;
+}
+
+#main_logo{
+    width: 20%;
+    height: 250px;
+    display: inline-block;
+    float: left;
+}
+
+#main_img{
+    width: 80%;
+    height: 250px;
+    display: inline-block;
+}
+
+#input_div{
+    width: 865px;
+    margin: 50px 85px 50px 85px;
+    display: inline-block;
+}
+
+.input_company{
+    width: 350px;
+    height: 40px;
+    float: left;
+}
+
+.input_location{
+    width: 150px;
+    height: 40px;
+    border: 2px 0px 2px 0px;
+    padding: 1px 0px 10x 0px;
+    float: left;
+}
+
+.input_jobtype{
+    width: 150px;
+    height: 40px;
+    border: 2px 0px 2px 0px;
+    padding: 1px 0px 10x 0px;
+    float: left;
+}
+
+.input_potal{
+    width: 150px;
+    height: 40px;
+    border: 2px 0px 2px 0px;
+    padding: 1px 0px 10x 0px;
+    float: left;
+}
+
+.search_btn{
+    width: 50px;
+    height: 40px;
+    vertical-align: middle;
+    margin-left: 10px;
+    vertical-align: auto;
+}
+
+
+.showing_class {
+    display: block;
+}
+
+.hiding_class {
+    display: none;  
+}
+

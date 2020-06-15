@@ -1,0 +1,50 @@
+*{
+    box-sizing: border-box;
+}
+
+#hot_jobs{
+    width: 880px;
+    height: 850px;              /*섹션의 전체 높이를 임의로 지정해놓음.*/
+    margin: 50px 100px 0px 100px;
+    background-color: white;
+}
+
+#news_box{
+    width: 180px;
+    height: 300px;
+    margin: 50px 20px 0px 20px;
+    display: inline-block;
+    float: left;
+    border: 1px solid #dae1e6;
+}
+
+#news_img{
+    width: 180px;
+    height: 120px;
+}
+
+#news_title{
+    width: 160px;
+    height: 60px;
+    margin: 10px 10px 10px 10px;
+    font-weight: bold;
+    font-size: 14px;
+    overflow: hidden;
+    /* white-space: normal; */
+    text-overflow: ellipsis;
+}
+
+#news_content{
+    width: 160px;
+    height: 80px;
+    margin: 0px 10px 10px 10px;
+    font-size: 11px;
+    overflow: hidden;
+    /* white-space: normal; */
+    text-overflow: ellipsis;
+}
+
+.news_class{
+text-decoration: none;
+color: black;
+}
