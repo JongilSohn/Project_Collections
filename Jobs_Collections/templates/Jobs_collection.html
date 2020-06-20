@@ -21,6 +21,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
 
     <!--글씨체-->
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <!-- 오늘의 취업 -->
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=MuseoModerno&display=swap" rel="stylesheet">
+    <!-- 메인로고 글씨 -->
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -40,6 +44,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script>
+
         $(document).ready(function () {
             news_readey();
             console.log('준비완료')
@@ -83,12 +88,40 @@
             })
         }</script>
 
+    <style type="text/css">
+        #fixedbtn {
+            position: fixed;
+            right: 80px;
+            bottom: 50px;
+            z-index: 1000;
+            width: 120px;
+            border-radius: 100%;
+            border: 2px solid black;
+        }
 
+        .balloon {
+            position: fixed;
+            margin: 50px;
+            width: 200px;
+            height: 300px;
+            z-index: 1000;
+            right: 0px;
+            bottom: 150px;
+            background: pink;
+            border-radius: 10px;
+        }
 
-
-    <!-- <link rel="stylesheet" href="header.css">
-    <link rel="stylesheet" href="section_page1.css">
-    <link rel="stylesheet" href="section_page2.css"> -->
+        .balloon:after {
+            border-top: 10px solid pink;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            content: "";
+            position: absolute;
+            top: 300px;
+            right: 80px;
+        }
+    </style>
 
 
 
@@ -96,6 +129,27 @@
 </head>
 
 <body>
+    <div class="balloon hiding_class">
+        <div id="tooltip_company">
+            <div id="tooltip_main">
+                관심있는 기업 목록
+            </div>
+            <ul>
+                <li>
+                    <a href="https://www.naver.com">
+                        회사이름이 온다
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.naver.com">
+                        회사 이름올꺼야
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <img src="{{url_for('static', filename='pocket.png')}}" id="fixedbtn" class="hiding_class">
+
     <header>
 
         <div id="header_bar">
@@ -104,8 +158,8 @@
             <!-- <img src="heart.png" width="29" height="29"> -->
             <h1 class="window_reload_js"> Collection Jobs</h1>
 
-            <h5 class="Like_show" alt="찜 목록으로 가기">Like List</h2>
-                <!-- <h5 class="Indeed_show">Indeed</h5>
+            <!-- <h5 class="Like_show" alt="찜 목록으로 가기">Like List</h2> -->
+            <!-- <h5 class="Indeed_show">Indeed</h5>
             <h5 class="Saramin_show">Saram-in</h5>
             <h5 class="JobKorea_show">Job-Korea</h5>
             <h5 class="Total_show">Total</h5> -->
@@ -117,7 +171,7 @@
             <div id="input_div">
 
 
-                <input class="input_company" placeholder="검색어 입력" />
+                <input class="input_company" placeholder=" 검색어 입력" />
 
                 <select class="input_potal">
                     <option>전체 (포탈 선택)</option>
@@ -260,7 +314,7 @@
             </div>
         </div>
 
-<!-- 
+        <!-- 
         <div id="section_Job_Korea" class="hiding_class">
 
             <div id="recruit_info">
@@ -553,7 +607,7 @@
         <div id="hot_jobs">
             <div id="recruit_info">
                 <div id="recruit_info_box">
-                    <h2> 오늘의 취업 관련 뉴스</h2>
+                    <h2 class="todays_news"> 오늘의 취업 관련 뉴스</h2>
                 </div>
                 <div id="recruit_news">
                     <div id="news_box">
@@ -716,6 +770,8 @@
     <script src="search.js"></script> -->
     <script src="{{ url_for('static', filename='search.js')}}"></script>
     <script src="{{ url_for('static', filename='reload.js')}}"></script>
+    <script src="{{ url_for('static', filename='pocket.js')}}"></script>
+    <script src="{{ url_for('static', filename='like_click.js')}}"></script>
     <!-- <script src="{{ url_for('static', filename='news.js')}}"></script> -->
 </body>
 

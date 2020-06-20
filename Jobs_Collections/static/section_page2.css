@@ -106,12 +106,12 @@ section{
 
 #company_name{
     width: 180px;
-    height: 40px;
+    height: 20px;
     display: inline-block;
     float: left;
 
     text-align: center;
-    margin: 25px 0px 25px 20px;
+    margin: 35px 0px 35px 20px;
 }
 .a_companys_name{
     text-decoration: none;

@@ -111,3 +111,99 @@
 #         print(h-1, 60+(m-45))
 # else: 
 #         print(h, m-45)
+
+# ========================================
+# 백준 For문 # 2739 번 --> O
+
+# n = int(input())
+
+# for i in range(1, 10):
+#     print(n, '*', i, '=', n*i)
+
+# ========================================
+# 백준 For문 # 10950 번 --> O
+
+# n = int(input())
+# for i in range(n):
+#     a, b = map(int, input().split())
+#     print(a+b)
+
+# ========================================
+# 백준 For문 # 8393 번 --> O
+
+# n = int(input())
+# total = 0
+# for i in range(1, n+1):
+#     total +=i
+# print(total)
+
+# ========================================
+# 백준 For문 # 15552 번 --> O
+
+# n = int(input())
+# for i in range(1,n+1):
+#     a, b = map(int, input().split())
+#     print(a+b)
+
+# ★★★★★★★★★★★★★★★★★★
+# 위와같이 for문을 사용할때 입출력방식에 의해서 시간초과가 날 수 있다.
+# import sys의 sys.stdin.readline().rstrip()을 사용하자.
+# ★★★★★★★★★★★★★★★★★★
+
+# import sys
+# n = int(sys.stdin.readline().rstrip())
+
+# for i in range(1,n+1):
+#     a, b = map(int, sys.stdin.readline().rstrip().split())
+#     print(a+b)
+
+# ========================================
+# 백준 For문 # 2741 번 --> O
+
+# import sys
+# n = int(sys.stdin.readline().rstrip())
+
+# for i in range(n, 0, -1):
+#     print(i)
+
+# ========================================
+# 백준 For문 # 11021 번 --> O
+
+# import sys
+# n = int(sys.stdin.readline().rstrip())
+
+# for i in range(0, n):
+#     a, b = map(int, sys.stdin.readline().rstrip().split())
+#     print("Case #{}: {}".format(i+1, a+b))                  #이렇게 문자열{}.format(변수)를 사용하여 편리하게 출력 가능하다.
+
+# ========================================
+# 백준 For문 # 2438 번 --> O
+
+# import sys
+# n = int(sys.stdin.readline().rstrip())
+
+# for i in range(0, n):
+#     a, b = map(int, sys.stdin.readline().rstrip().split())
+#     print("Case #{}: {} + {} = {}".format(i+1, a, b, a+b)) 
+
+# ========================================
+# 백준 For문 # 2439 번 --> O
+# import sys
+
+# n = int(sys.stdin.readline().rstrip())
+
+# for i in range(1,n+1):
+#     print(' '*(n-i)+''+'*'*i)         # ''사이에 넣는 이유는 ''을 넣지 않으면 공백이 1칸 생긴다.
+
+# ========================================
+# 백준 For문 # 10871 번 --> O
+import sys
+
+a ,b = map(int, sys.stdin.readline().rstrip().split())
+lis = []
+
+for i in range(a):
+    x = int(sys.stdin.readline().strip())
+    if b < x:
+        lis.append(x)
+print(x)

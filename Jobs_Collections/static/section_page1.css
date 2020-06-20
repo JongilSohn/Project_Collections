@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+.todays_news{
+    font-family: 'Jua', sans-serif;
+}
+
 #hot_jobs{
     width: 880px;
     height: 850px;              /*섹션의 전체 높이를 임의로 지정해놓음.*/

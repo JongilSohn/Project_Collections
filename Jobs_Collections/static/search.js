@@ -30,6 +30,24 @@ const input_potal_box = document.querySelector(".input_potal")
 const input_location_box = document.querySelector(".input_location")
 const input_jobtype_box = document.querySelector(".input_jobtype")
 
+const pocket_bar = document.querySelector("#fixedbtn")
+
+const like_btn = document.querySelector("#like_click");
+
+
+function handleClick_like() {
+    console.log("A")
+    // console.log(like_btn.className)
+    // console.log("A")
+}
+
+// function wait_like(){
+//     // like_btn.addEventListener("click", handleClick_like)
+//     console.log("A")
+
+// }
+
+
 
 function handleClick_search() {
     
@@ -68,6 +86,9 @@ function handleClick_search() {
 
     section_recruit_info.classList.remove('hiding_class');
     section_news_info.classList.add('hiding_class');
+    pocket_bar.classList.remove('hiding_class');
+    
+    
 }
 
 
@@ -120,8 +141,8 @@ function indeed_jobs_give(input_keyword, input_location, input_jobtype) {
                         </div>
 
                         <div id="like_btn">
-                            <a href="">
-                                <button class="pink_btn">찜</button>
+                            <a>
+                                <button class="pink_btn" id="like_click" alt="${company}, ${link}" onclick="handleClick_like()">찜</button>
                             </a>
                         </div>
 
@@ -131,10 +152,11 @@ function indeed_jobs_give(input_keyword, input_location, input_jobtype) {
                 $('#total_recruit_info').append(temp_html);
                 jobs_num.innerText = `총 ${id_jobs.length}개의 채용정보`;
                 jobs_potal.innerText = 'Indeed의 채용정보';
-
+                
             }
-        }
+        }  
     })
+    
 }
 
 
@@ -188,7 +210,7 @@ function saramin_jobs_give(input_keyword, input_location, input_jobtype) {
 
                         <div id="like_btn">
                             <a href="">
-                                <button class="pink_btn">찜</button>
+                            <button class="pink_btn like_click" alt="${company} ${link}">찜</button>
                             </a>
                         </div>
 
@@ -254,7 +276,7 @@ function job_korea_jobs_give(input_keyword, input_location, input_jobtype) {
 
                         <div id="like_btn">
                             <a href="${link}">
-                                <button class="pink_btn">찜</button>
+                            <button class="pink_btn like_click" alt="${company} ${link}">찜</button>
                             </a>
                         </div>
 
@@ -323,7 +345,7 @@ function job_total_give(input_keyword, input_location, input_jobtype) {
 
                         <div id="like_btn">
                             <a href="">
-                                <button class="pink_btn">찜</button>
+                            <button class="pink_btn like_click" alt="${company} ${link}">찜</button>
                             </a>
                         </div>
 
@@ -377,7 +399,7 @@ function job_total_give(input_keyword, input_location, input_jobtype) {
 
                         <div id="like_btn">
                             <a href="">
-                                <button class="pink_btn">찜</button>
+                            <button class="pink_btn like_click" alt="${company} ${link}">찜</button>
                             </a>
                         </div>
 
@@ -429,7 +451,7 @@ function job_total_give(input_keyword, input_location, input_jobtype) {
 
                         <div id="like_btn">
                             <a href="">
-                                <button class="pink_btn">찜</button>
+                            <button class="pink_btn like_click" alt="${company} ${link}">찜</button>
                             </a>
                         </div>
 
