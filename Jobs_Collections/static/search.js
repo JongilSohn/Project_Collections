@@ -32,25 +32,40 @@ const input_jobtype_box = document.querySelector(".input_jobtype")
 
 const pocket_bar = document.querySelector("#fixedbtn")
 
-const like_btn = document.querySelector("#like_click");
+const like_list = document.querySelector("#like_list")
+
+const like_list_LS = 'like_company';
+
+let like_list_ar = []
 
 
-function handleClick_like() {
-    console.log("A")
-    // console.log(like_btn.className)
-    // console.log("A")
+function handleClick_like(like_company, like_link) {
+    const newId = like_list_ar.length + 1
+    console.log(like_company, like_link)
+    let like_html = `<li>
+                        <a href="${like_link}">
+                         ${like_company}
+                        </a>
+                    </li>`;
+    // like_list.append(like_html);
+    $('#like_list').append(like_html);
+
+    const like_list_Obj = {
+        'like_company' : like_company,
+        'like_link' : like_link
+        // id :newId
+    };
+    console.log(like_list_Obj)
+    like_list_ar.push(like_list_Obj)
+    save_like_list();
+
 }
 
-// function wait_like(){
-//     // like_btn.addEventListener("click", handleClick_like)
-//     console.log("A")
-
-// }
 
 
 
 function handleClick_search() {
-    
+
     let input_keyword = input_keyword_box.value
     let input_potal = input_potal_box.value
     let input_location = input_location_box.value
@@ -58,37 +73,37 @@ function handleClick_search() {
 
     console.log(`검색어 : ${input_keyword}, 포탈 : ${input_potal}, 위치 : ${input_location}, 고용 형태 : ${input_jobtype}`)
 
-    if(input_location == '전체 (희망 지역)'){
+    if (input_location == '전체 (희망 지역)') {
         input_location = ''
     }
 
-    if(input_jobtype == '전체 (근무 형태)'){
+    if (input_jobtype == '전체 (근무 형태)') {
         input_jobtype = ''
     }
 
     // console.log(`${input_keyword}를 검색합니다.`)
 
-    if(input_potal == '전체 (포탈 선택)'){
+    if (input_potal == '전체 (포탈 선택)') {
         job_total_give(input_keyword, input_location, input_jobtype)
     }
 
-    else if(input_potal == 'Job-korea'){
+    else if (input_potal == 'Job-korea') {
         job_korea_jobs_give(input_keyword, input_location, input_jobtype)
     }
 
-    else if(input_potal == 'Saram-in'){
+    else if (input_potal == 'Saram-in') {
         saramin_jobs_give(input_keyword, input_location, input_jobtype)
     }
 
-    else if(input_potal == 'Indeed'){
+    else if (input_potal == 'Indeed') {
         indeed_jobs_give(input_keyword, input_location, input_jobtype)
     }
 
     section_recruit_info.classList.remove('hiding_class');
     section_news_info.classList.add('hiding_class');
     pocket_bar.classList.remove('hiding_class');
-    
-    
+
+
 }
 
 
@@ -96,13 +111,13 @@ function indeed_jobs_give(input_keyword, input_location, input_jobtype) {
     $('#total_recruit_info').empty()
     $.ajax({
         type: "GET",
-        url: `/api/indeed?input_keyword_give=`+input_keyword+`&input_location_give=`+input_location+`&input_jobtype_give=`+input_jobtype,
+        url: `/api/indeed?input_keyword_give=` + input_keyword + `&input_location_give=` + input_location + `&input_jobtype_give=` + input_jobtype,
         data: {},
         success: function (response) {
             let id_jobs = response['id_jobs'];
             for (let i = 0; i < id_jobs.length; i++) {
                 let r_id_jobs = id_jobs[i]
-                
+
                 let company = r_id_jobs['companys']
                 let position = r_id_jobs['positions']
                 let location = r_id_jobs['locations']
@@ -142,7 +157,7 @@ function indeed_jobs_give(input_keyword, input_location, input_jobtype) {
 
                         <div id="like_btn">
                             <a>
-                                <button class="pink_btn" id="like_click" alt="${company}, ${link}" onclick="handleClick_like()">찜</button>
+                                <button class="pink_btn" id="like_click" onclick="handleClick_like('${company}', '${link}')">찜</button>
                             </a>
                         </div>
 
@@ -152,11 +167,11 @@ function indeed_jobs_give(input_keyword, input_location, input_jobtype) {
                 $('#total_recruit_info').append(temp_html);
                 jobs_num.innerText = `총 ${id_jobs.length}개의 채용정보`;
                 jobs_potal.innerText = 'Indeed의 채용정보';
-                
+
             }
-        }  
+        }
     })
-    
+
 }
 
 
@@ -164,13 +179,13 @@ function saramin_jobs_give(input_keyword, input_location, input_jobtype) {
     $('#total_recruit_info').empty()
     $.ajax({
         type: "GET",
-        url: `/api/saramin?input_keyword_give=`+input_keyword+`&input_location_give=`+input_location+`&input_jobtype_give=`+input_jobtype,
+        url: `/api/saramin?input_keyword_give=` + input_keyword + `&input_location_give=` + input_location + `&input_jobtype_give=` + input_jobtype,
         data: {},
         success: function (response) {
             let sa_jobs = response['sa_jobs'];
             for (let i = 0; i < sa_jobs.length; i++) {
                 let r_sa_jobs = sa_jobs[i]
-                
+
                 let company = r_sa_jobs['companys']
                 let position = r_sa_jobs['positions']
                 let location = r_sa_jobs['locations']
@@ -209,8 +224,8 @@ function saramin_jobs_give(input_keyword, input_location, input_jobtype) {
                         </div>
 
                         <div id="like_btn">
-                            <a href="">
-                            <button class="pink_btn like_click" alt="${company} ${link}">찜</button>
+                            <a>
+                            <button class="pink_btn" id="like_click" onclick="handleClick_like('${company}', '${link}')">찜</button>
                             </a>
                         </div>
 
@@ -230,13 +245,13 @@ function job_korea_jobs_give(input_keyword, input_location, input_jobtype) {
     $('#total_recruit_info').empty()
     $.ajax({
         type: "GET",
-        url: `/api/job_korea?input_keyword_give=`+input_keyword+`&input_location_give=`+input_location+`&input_jobtype_give=`+input_jobtype,
+        url: `/api/job_korea?input_keyword_give=` + input_keyword + `&input_location_give=` + input_location + `&input_jobtype_give=` + input_jobtype,
         data: {},
         success: function (response) {
             let jk_jobs = response['jk_jobs'];
             for (let i = 0; i < jk_jobs.length; i++) {
                 let r_jk_jobs = jk_jobs[i]
-                
+
                 let company = r_jk_jobs['companys']
                 let position = r_jk_jobs['positions']
                 let location = r_jk_jobs['locations']
@@ -275,8 +290,8 @@ function job_korea_jobs_give(input_keyword, input_location, input_jobtype) {
                         </div>
 
                         <div id="like_btn">
-                            <a href="${link}">
-                            <button class="pink_btn like_click" alt="${company} ${link}">찜</button>
+                            <a>
+                            <button class="pink_btn" id="like_click" onclick="handleClick_like('${company}', '${link}')">찜</button>
                             </a>
                         </div>
 
@@ -296,7 +311,7 @@ function job_total_give(input_keyword, input_location, input_jobtype) {
     $('#total_recruit_info').empty()
     $.ajax({
         type: "GET",
-        url: `/api/total?input_keyword_give=`+input_keyword+`&input_location_give=`+input_location+`&input_jobtype_give=`+input_jobtype,
+        url: `/api/total?input_keyword_give=` + input_keyword + `&input_location_give=` + input_location + `&input_jobtype_give=` + input_jobtype,
         data: {},
         success: function (response) {
             let jk_jobs = response['jk_jobs'];
@@ -305,7 +320,7 @@ function job_total_give(input_keyword, input_location, input_jobtype) {
             // console.log(jk_jobs)
             for (let i = 0; i < jk_jobs.length; i++) {
                 let r_jk_jobs = jk_jobs[i]
-                
+
                 let company = r_jk_jobs['companys']
                 let position = r_jk_jobs['positions']
                 let location = r_jk_jobs['locations']
@@ -344,8 +359,8 @@ function job_total_give(input_keyword, input_location, input_jobtype) {
                         </div>
 
                         <div id="like_btn">
-                            <a href="">
-                            <button class="pink_btn like_click" alt="${company} ${link}">찜</button>
+                            <a>
+                            <button class="pink_btn" id="like_click" onclick="handleClick_like('${company}', '${link}')">찜</button>
                             </a>
                         </div>
 
@@ -359,7 +374,7 @@ function job_total_give(input_keyword, input_location, input_jobtype) {
 
             for (let i = 0; i < sa_jobs.length; i++) {
                 let r_sa_jobs = sa_jobs[i]
-                
+
                 let company = r_sa_jobs['companys']
                 let position = r_sa_jobs['positions']
                 let location = r_sa_jobs['locations']
@@ -398,8 +413,8 @@ function job_total_give(input_keyword, input_location, input_jobtype) {
                         </div>
 
                         <div id="like_btn">
-                            <a href="">
-                            <button class="pink_btn like_click" alt="${company} ${link}">찜</button>
+                            <a>
+                            <button class="pink_btn" id="like_click" onclick="handleClick_like('${company}', '${link}')">찜</button>
                             </a>
                         </div>
 
@@ -411,7 +426,7 @@ function job_total_give(input_keyword, input_location, input_jobtype) {
 
             for (let i = 0; i < id_jobs.length; i++) {
                 let r_id_jobs = id_jobs[i]
-                
+
                 let company = r_id_jobs['companys']
                 let position = r_id_jobs['positions']
                 let location = r_id_jobs['locations']
@@ -450,8 +465,8 @@ function job_total_give(input_keyword, input_location, input_jobtype) {
                         </div>
 
                         <div id="like_btn">
-                            <a href="">
-                            <button class="pink_btn like_click" alt="${company} ${link}">찜</button>
+                            <a>
+                            <button class="pink_btn" id="like_click" onclick="handleClick_like('${company}', '${link}')">찜</button>
                             </a>
                         </div>
 
@@ -464,18 +479,40 @@ function job_total_give(input_keyword, input_location, input_jobtype) {
     })
 }
 
+function print_like(like){
+    console.log("like",like)
+}
 
+function save_like_list(){
+    localStorage.setItem(like_list_LS, JSON.stringify(like_list_ar));
+}
 
-
-    
-    function init() {
-
-        search_btn.addEventListener("click", handleClick_search);
-
-        // Total_logo.addEventListener("click", handleClick_search);   
-        // Job_Koera_logo.addEventListener("click", handleClick_Job_Korea);
-        // Saramin_logo.addEventListener("click", handleClick_Saramin);
-        // Indeed_logo.addEventListener("click", handleClick_Indeed);
+function load_like(){
+    const loaded_like = localStorage.getItem(like_list_LS);
+    console.log(like_list_LS.length/3)
+    if (loaded_like !== null){
+        const parsed_like = JSON.parse(loaded_like);
+        parsed_like.forEach(function(like){
+            // console.log(like)
+            print_like(like)
+        })
     }
+}
+
+
+
+
+function init() {
+
+    search_btn.addEventListener("click", handleClick_search);
+    
+
+    load_like();
+
+    // Total_logo.addEventListener("click", handleClick_search);   
+    // Job_Koera_logo.addEventListener("click", handleClick_Job_Korea);
+    // Saramin_logo.addEventListener("click", handleClick_Saramin);
+    // Indeed_logo.addEventListener("click", handleClick_Indeed);
+}
 init();
 
