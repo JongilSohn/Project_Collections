@@ -5,15 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- <link rel="stylesheet" href="{{url_for('static', filename='header.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='section.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='aside.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='footer.css')}}"> -->
-
     <link rel="icon" type="image/png" sizes="16x16" href="{{url_for('static', filename='favicon.png')}}">
     <!-- favicon.ico파일을 현재 html이 있는 파일 경로에 다운받고
                               href="/favicon.ico?1"로 되어있는데 ./favicon으로 바꾸어 준다.
                               .은 현재 폴더라는 뜻이다.  -->
+                              
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -96,7 +92,7 @@
     <style type="text/css">
         #fixedbtn {
             position: fixed;
-            right: 80px;
+            right: 93px;
             bottom: 50px;
             z-index: 1000;
             width: 120px;
@@ -121,9 +117,9 @@
             border-right: 10px solid transparent;
             border-bottom: 10px solid transparent;
             content: "";
-            position: absolute;
-            top: 65px;
-            right: 80px;
+            position: relative;
+            top: 33px;
+            right: -90px;
         }
     </style>
 
@@ -232,7 +228,7 @@
                 </div>
 
                 <div id="None_info" class="hiding_class">
-                    <h1>원하시는 취업 정보가 없습니다.</h1>
+                    <h1>일치하는 채용 정보가 없습니다.</h1>
                 </div>
 
 

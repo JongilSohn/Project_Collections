@@ -176,14 +176,17 @@ function indeed_jobs_give(input_keyword, input_location, input_jobtype) {
         },
         success: function (response) {
             let id_jobs = response['id_jobs'];
-            if (id_jobs=[]){
+            // console.log(id_jobs.length)
+            if (id_jobs.length === 0){
                 alert('일치하는 정보가 없습니다.');
                 None_info.classList.remove('hiding_class')
                 loadingbar.classList.add('hiding_class')
             }
+            
+
+
             for (let i = 0; i < id_jobs.length; i++) {
                 let r_id_jobs = id_jobs[i]
-
                 let company = r_id_jobs['companys']
                 let position = r_id_jobs['positions']
                 let location = r_id_jobs['locations']
