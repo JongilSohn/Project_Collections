@@ -111,6 +111,10 @@ def jk_get_jobs(input_keyword_recieve, input_location_recieve, input_jobtype_rec
         input_location = 'N000'
 
 
+    print("검색어는", input_keyword_recieve)
+    print("근무형태 입력은", input_jobtype)
+    print("위치 입력은", input_location)
+
     global URL
     global job_type_box
 

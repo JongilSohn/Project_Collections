@@ -21,8 +21,7 @@ def get_last_page():
     pagination = soup.find("div", {"class": "pagination"})
 
     if pagination is not None:
-
-
+        
         links = pagination.find_all('a')  # 가져온것에서 페이지의 링크 수를 찾아온다.
         pages = []  # 링크에서 span이 붙은것만 빼와서 리스트에 저장한다. 뒤에 짜잘한것을 없애주기 위해.
 

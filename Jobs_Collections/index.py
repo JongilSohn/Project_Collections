@@ -85,5 +85,5 @@ def get_total_jobs():
 
     
 if __name__ == '__main__':
-    app.run('localhost', port=10020, debug=True)
+    app.run('localhost', port=10023, debug=True)
 # print(news_craw())

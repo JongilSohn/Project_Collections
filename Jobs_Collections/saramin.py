@@ -32,6 +32,7 @@ def extract_jobs(last_page):
         soup = BeautifulSoup(result.text, 'html.parser')
         jobs_page = soup.find_all("div", {"class":"item_recruit"})
 
+
         for job in jobs_page:
             #job = extract_job(jobs_page)
             companys = job.find("strong", {"class":"corp_name"}).find("a")["title"]
@@ -40,8 +41,7 @@ def extract_jobs(last_page):
             ##질문!!! 여기서 구, 동을 가져오고 싶다.
             #job_type = job.find("div", {"class":"job_condition"}).find_all("span")[3].string
             links = job.find("h2", {"class":"job_tit"}).find("a")["href"]
-            links = f'http://www.saramin.co.kr{links}'
-
+            links = f'http://www.saramin.co.kr{links}'           
             jobs_kind = {'companys':companys, 'positions':positions, 'locations':locations, 'links':links }
 
             
@@ -106,7 +106,7 @@ def sa_get_jobs(input_keyword_recieve, input_location_recieve, input_jobtype_rec
     elif input_location_recieve == '제주':
         input_location = 116000
 
-
+    print("검색어는", input_keyword_recieve)
     print("근무형태 입력은", input_jobtype)
     print("위치 입력은", input_location)
 

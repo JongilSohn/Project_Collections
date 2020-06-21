@@ -36,26 +36,74 @@ const like_list = document.querySelector("#like_list")
 
 const like_list_LS = 'like_company';
 
+
+const loadingbar = document.querySelector("#loadingbar_center")
+const None_info = document.querySelector("#None_info")
+
 let like_list_ar = []
+
+
+
+function like_del(del_company, del_link){
+    const del_btn = event.target;
+    const li = del_btn.parentNode;  
+    like_list.removeChild(li);
+
+    localStorage.removeItem('test');
+    // console.log(localStorage.getItem(like_list_LS))
+    // console.log(like_list_ar.length)
+
+    for(let i = 0; i <like_list_ar.length; i++){
+        if (like_list_ar[i]['like_company'] === del_company){
+            localStorage.removeItem(like_list_ar[i]);
+            console.log(like_list_ar[i])
+        }
+    }
+
+
+    // const loaded_like = localStorage.getItem(like_list_LS);
+    
+    // console.log(loaded_like)
+    
+    // if (loaded_like !== null) {
+    //     const parsed_like = JSON.parse(loaded_like);
+    //     parsed_like.forEach(function (like) {
+    //         if (like['like_company']===del_company){
+    //         console.log(like)
+    //         console.log("삭제함수", del_company)
+    //         localStorage.removeItem(like);
+    //     }})
+    // }
+
+
+    // const like_del_LS = like_list_ar.filter(function(like_list_ar){
+    //     return 
+    // })
+
+}
+
 
 
 function handleClick_like(like_company, like_link) {
     const newId = like_list_ar.length + 1
-    console.log(like_company, like_link)
     let like_html = `<li>
                         <a href="${like_link}">
-                         ${like_company}
+                            <span id="like_list_span">
+                              ${like_company}
+                            </span>
                         </a>
+                            <button id="like_del_btn" onclick="like_del('${like_company}', '${like_link}')">
+                                 ❌
+                            </button>
                     </li>`;
     // like_list.append(like_html);
     $('#like_list').append(like_html);
 
     const like_list_Obj = {
-        'like_company' : like_company,
-        'like_link' : like_link
+        'like_company': like_company,
+        'like_link': like_link
         // id :newId
     };
-    console.log(like_list_Obj)
     like_list_ar.push(like_list_Obj)
     save_like_list();
 
@@ -72,6 +120,12 @@ function handleClick_search() {
     let input_jobtype = input_jobtype_box.value
 
     console.log(`검색어 : ${input_keyword}, 포탈 : ${input_potal}, 위치 : ${input_location}, 고용 형태 : ${input_jobtype}`)
+
+    if  (input_keyword == ''){
+        alert("검색어를 입력하세요.")
+        return 0
+    }
+
 
     if (input_location == '전체 (희망 지역)') {
         input_location = ''
@@ -101,20 +155,32 @@ function handleClick_search() {
 
     section_recruit_info.classList.remove('hiding_class');
     section_news_info.classList.add('hiding_class');
-    pocket_bar.classList.remove('hiding_class');
+    
 
 
 }
 
 
 function indeed_jobs_give(input_keyword, input_location, input_jobtype) {
+    None_info.classList.add('hiding_class');
+    loadingbar.classList.remove('hiding_class');
     $('#total_recruit_info').empty()
     $.ajax({
         type: "GET",
         url: `/api/indeed?input_keyword_give=` + input_keyword + `&input_location_give=` + input_location + `&input_jobtype_give=` + input_jobtype,
         data: {},
+        error : function(){
+            alert('일치하는 정보가 없습니다.');
+            None_info.classList.remove('hiding_class')
+            loadingbar.classList.add('hiding_class')
+        },
         success: function (response) {
             let id_jobs = response['id_jobs'];
+            if (id_jobs=[]){
+                alert('일치하는 정보가 없습니다.');
+                None_info.classList.remove('hiding_class')
+                loadingbar.classList.add('hiding_class')
+            }
             for (let i = 0; i < id_jobs.length; i++) {
                 let r_id_jobs = id_jobs[i]
 
@@ -167,6 +233,9 @@ function indeed_jobs_give(input_keyword, input_location, input_jobtype) {
                 $('#total_recruit_info').append(temp_html);
                 jobs_num.innerText = `총 ${id_jobs.length}개의 채용정보`;
                 jobs_potal.innerText = 'Indeed의 채용정보';
+                loadingbar.classList.add('hiding_class');
+                pocket_bar.classList.remove('hiding_class');
+                
 
             }
         }
@@ -176,11 +245,18 @@ function indeed_jobs_give(input_keyword, input_location, input_jobtype) {
 
 
 function saramin_jobs_give(input_keyword, input_location, input_jobtype) {
+    None_info.classList.add('hiding_class');
+    loadingbar.classList.remove('hiding_class');
     $('#total_recruit_info').empty()
     $.ajax({
         type: "GET",
         url: `/api/saramin?input_keyword_give=` + input_keyword + `&input_location_give=` + input_location + `&input_jobtype_give=` + input_jobtype,
         data: {},
+        error : function(){
+            alert('일치하는 정보가 없습니다.');
+            None_info.classList.remove('hiding_class')
+            loadingbar.classList.add('hiding_class')
+        },
         success: function (response) {
             let sa_jobs = response['sa_jobs'];
             for (let i = 0; i < sa_jobs.length; i++) {
@@ -235,6 +311,8 @@ function saramin_jobs_give(input_keyword, input_location, input_jobtype) {
                 $('#total_recruit_info').append(temp_html);
                 jobs_num.innerText = `총 ${sa_jobs.length}개의 채용정보`;
                 jobs_potal.innerText = 'Saram-in의 채용정보';
+                loadingbar.classList.add('hiding_class');
+                pocket_bar.classList.remove('hiding_class');
             }
         }
     })
@@ -242,11 +320,18 @@ function saramin_jobs_give(input_keyword, input_location, input_jobtype) {
 
 
 function job_korea_jobs_give(input_keyword, input_location, input_jobtype) {
+    None_info.classList.add('hiding_class');
+    loadingbar.classList.remove('hiding_class');
     $('#total_recruit_info').empty()
     $.ajax({
         type: "GET",
         url: `/api/job_korea?input_keyword_give=` + input_keyword + `&input_location_give=` + input_location + `&input_jobtype_give=` + input_jobtype,
         data: {},
+        error : function(){
+            alert('일치하는 정보가 없습니다.');
+            None_info.classList.remove('hiding_class')
+            loadingbar.classList.add('hiding_class')
+        },
         success: function (response) {
             let jk_jobs = response['jk_jobs'];
             for (let i = 0; i < jk_jobs.length; i++) {
@@ -301,6 +386,8 @@ function job_korea_jobs_give(input_keyword, input_location, input_jobtype) {
                 $('#total_recruit_info').append(temp_html);
                 jobs_num.innerText = `총 ${jk_jobs.length}개의 채용정보`;
                 jobs_potal.innerText = 'Job-korea의 채용정보';
+                loadingbar.classList.add('hiding_class');
+                pocket_bar.classList.remove('hiding_class');
             }
         }
     })
@@ -308,11 +395,18 @@ function job_korea_jobs_give(input_keyword, input_location, input_jobtype) {
 
 
 function job_total_give(input_keyword, input_location, input_jobtype) {
+    None_info.classList.add('hiding_class');
+    loadingbar.classList.remove('hiding_class');
     $('#total_recruit_info').empty()
     $.ajax({
         type: "GET",
         url: `/api/total?input_keyword_give=` + input_keyword + `&input_location_give=` + input_location + `&input_jobtype_give=` + input_jobtype,
         data: {},
+        error : function(){
+            alert('일치하는 정보가 없습니다.');
+            None_info.classList.remove('hiding_class')
+            loadingbar.classList.add('hiding_class')
+        },
         success: function (response) {
             let jk_jobs = response['jk_jobs'];
             let id_jobs = response['id_jobs'];
@@ -370,6 +464,8 @@ function job_total_give(input_keyword, input_location, input_jobtype) {
                 $('#total_recruit_info').append(temp_html);
                 jobs_num.innerText = `총 ${jk_jobs.length + id_jobs.length + sa_jobs.length}개의 채용정보`;
                 jobs_potal.innerText = '전체포탈의 채용정보';
+                loadingbar.classList.add('hiding_class');
+                pocket_bar.classList.remove('hiding_class');
             }
 
             for (let i = 0; i < sa_jobs.length; i++) {
@@ -479,20 +575,42 @@ function job_total_give(input_keyword, input_location, input_jobtype) {
     })
 }
 
-function print_like(like){
-    console.log("like",like)
+function print_like(like) {
+    let like_company_LS = like['like_company']
+    let like_link_LS = like['like_link']
+
+    let like_html = `<li>
+                        <a href="${like_link_LS}">
+                            <span id="like_list_span">
+                                ${like_company_LS}
+                            </span>
+                        </a>
+                         <button id="like_del_btn" onclick="like_del('${like_company_LS}', '${like_link_LS}')">
+                            ❌
+                         </button>
+                    </li>`;
+    // like_list.append(like_html);
+    $('#like_list').append(like_html);
+
+    const like_list_Obj = {
+        'like_company': like_company_LS,
+        'like_link': like_link_LS
+        // id :newId
+    };
+    like_list_ar.push(like_list_Obj)
+    save_like_list();
+
 }
 
-function save_like_list(){
+function save_like_list() {
     localStorage.setItem(like_list_LS, JSON.stringify(like_list_ar));
 }
 
-function load_like(){
+function load_like() {
     const loaded_like = localStorage.getItem(like_list_LS);
-    console.log(like_list_LS.length/3)
-    if (loaded_like !== null){
+    if (loaded_like !== null) {
         const parsed_like = JSON.parse(loaded_like);
-        parsed_like.forEach(function(like){
+        parsed_like.forEach(function (like) {
             // console.log(like)
             print_like(like)
         })
@@ -505,7 +623,7 @@ function load_like(){
 function init() {
 
     search_btn.addEventListener("click", handleClick_search);
-    
+
 
     load_like();
 
