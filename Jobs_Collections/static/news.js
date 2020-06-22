@@ -30,7 +30,6 @@ function news_readey() {
                                          <img src="${news_img}"
                                           class="" width="178" height="120" onerror="this.parentNode.style.display='none';">
                                      </div>
-
                                  <div id="news_title">
                                       ${news_title}
                                 </div>

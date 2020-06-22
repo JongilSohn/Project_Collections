@@ -126,4 +126,3 @@ def jk_get_jobs(input_keyword_recieve, input_location_recieve, input_jobtype_rec
 
     return jk_jobs
     # return jsonify ({'result':'success','jk_jobs':jk_jobs})
-    

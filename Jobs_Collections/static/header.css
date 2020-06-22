@@ -6,7 +6,6 @@
     margin: 0 auto;
     height: 100px;
     background-color: black;
-
 }
 
 #main_bar{
@@ -16,8 +15,8 @@
 
 .window_reload_js{
     display: inline-block;
-    margin: 18px 0px 0px 50px;
-    font-size: 54px;
+    margin: 18px 0px 0px 20px;
+    font-size: 48px;
     color: white;
     font-family: 'MuseoModerno', cursive;
 }
@@ -168,22 +167,23 @@
 
 #like_list_span{
     width: 110px;
+    height: 21px;
+    /* height: 24px; */
     overflow: hidden;
     /* white-space: normal; */
     text-overflow: ellipsis;
+    /* display: inline-block; */
+    display: inline-block;
 }
 
-
+#like_list_li{
+    
+}
 
 #like_del_btn{
     float: right;
-    height: 20px;
-    width: 27px;
+    height: 21px;
     font-size: 1px;
     margin: 0px 15px 0px 0px;
     border-radius: 10%;
 }
-
-
-
-

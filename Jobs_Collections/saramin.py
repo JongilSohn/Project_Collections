@@ -124,7 +124,3 @@ def sa_get_jobs(input_keyword_recieve, input_location_recieve, input_jobtype_rec
 
     return sa_jobs
     # return jsonify ({'result':'success','sa_jobs':sa_jobs})
-
-
-    
-

@@ -41,6 +41,7 @@ section{
 
 #recruit_info{
     height: 100px;
+    margin-bottom: 40px;
 }
 
 #recruit_info_box{
@@ -73,7 +74,6 @@ section{
     height: 120px;
     margin: 25px 40px 25px 100px;
     float: left;
-
 } */
 
 #recruit_post_link{
@@ -139,7 +139,7 @@ section{
     display: inline-block;
     float: left;
     font-size: 11px;
-    width: 150px;
+    width: 300px;
 }
 
 #income_name{
@@ -147,11 +147,11 @@ section{
     float: left;
     margin-left: 20px;
     font-size: 13px;
-    width: 240px;
+    width: 90px;
 }
 
 #None_info{
     text-align: center;
     height: 300px;
-    margin-top: 200px;
+    margin-top: 400px;
 }

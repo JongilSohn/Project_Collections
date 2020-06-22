@@ -39,32 +39,34 @@ const like_list_LS = 'like_company';
 
 const loadingbar = document.querySelector("#loadingbar_center")
 const None_info = document.querySelector("#None_info")
+const recruit_info = document.querySelector("#recruit_info")
 
 let like_list_ar = []
 
 
 
-function like_del(del_company, del_link){
+function like_del(del_company, del_link) {
     const del_btn = event.target;
-    const li = del_btn.parentNode;  
+    const li = del_btn.parentNode;
     like_list.removeChild(li);
 
     localStorage.removeItem('test');
     // console.log(localStorage.getItem(like_list_LS))
     // console.log(like_list_ar.length)
 
-    for(let i = 0; i <like_list_ar.length; i++){
-        if (like_list_ar[i]['like_company'] === del_company){
-            localStorage.removeItem(like_list_ar[i]);
-            console.log(like_list_ar[i])
+    for (let i = 0; i < like_list_ar.length; i++) {
+        if (like_list_ar[i]['like_company'] === del_company) {
+            like_list_ar.splice(i, 1)
+            console.log("remove", like_list_ar[i])
         }
     }
+    save_like_list();
 
 
     // const loaded_like = localStorage.getItem(like_list_LS);
-    
+
     // console.log(loaded_like)
-    
+
     // if (loaded_like !== null) {
     //     const parsed_like = JSON.parse(loaded_like);
     //     parsed_like.forEach(function (like) {
@@ -82,32 +84,48 @@ function like_del(del_company, del_link){
 
 }
 
-
+const pocket_ar = []
 
 function handleClick_like(like_company, like_link) {
-    const newId = like_list_ar.length + 1
-    let like_html = `<li>
+    console.log(typeof (like_company))
+    console.log(like_list_ar)
+    var LS_like_index = like_list_ar.findIndex(i => i.like_company === like_company)
+    if (LS_like_index !== -1) {
+        alert("관심기업에 이미 등록되어있습니다.")
+    }
+    else {
+
+        if (like_list_ar.length < 24) {
+            let like_html = `<li id="like_list_li">
                         <a href="${like_link}">
-                            <span id="like_list_span">
-                              ${like_company}
-                            </span>
+                            <div id="like_list_span">
+                                <span>
+                                    ${like_company}
+                                </span>
+                            </div>
                         </a>
                             <button id="like_del_btn" onclick="like_del('${like_company}', '${like_link}')">
                                  ❌
                             </button>
                     </li>`;
-    // like_list.append(like_html);
-    $('#like_list').append(like_html);
+            // like_list.append(like_html);
+            $('#like_list').append(like_html);
 
-    const like_list_Obj = {
-        'like_company': like_company,
-        'like_link': like_link
-        // id :newId
-    };
-    like_list_ar.push(like_list_Obj)
-    save_like_list();
+            const like_list_Obj = {
+                'like_company': like_company,
+                'like_link': like_link
 
+            };
+            like_list_ar.push(like_list_Obj)
+            save_like_list();
+        }
+        else {
+            alert("관심기업은 최대 23개까지만 등록 가능합니다.")
+
+        }
+    }
 }
+
 
 
 
@@ -121,7 +139,7 @@ function handleClick_search() {
 
     console.log(`검색어 : ${input_keyword}, 포탈 : ${input_potal}, 위치 : ${input_location}, 고용 형태 : ${input_jobtype}`)
 
-    if  (input_keyword == ''){
+    if (input_keyword == '') {
         alert("검색어를 입력하세요.")
         return 0
     }
@@ -155,7 +173,7 @@ function handleClick_search() {
 
     section_recruit_info.classList.remove('hiding_class');
     section_news_info.classList.add('hiding_class');
-    
+
 
 
 }
@@ -164,25 +182,32 @@ function handleClick_search() {
 function indeed_jobs_give(input_keyword, input_location, input_jobtype) {
     None_info.classList.add('hiding_class');
     loadingbar.classList.remove('hiding_class');
+    pocket_bar.classList.add('hiding_class');
+    $(recruit_info).addClass("hiding_class");
     $('#total_recruit_info').empty()
     $.ajax({
         type: "GET",
         url: `/api/indeed?input_keyword_give=` + input_keyword + `&input_location_give=` + input_location + `&input_jobtype_give=` + input_jobtype,
         data: {},
-        error : function(){
+        error: function () {
             alert('일치하는 정보가 없습니다.');
             None_info.classList.remove('hiding_class')
             loadingbar.classList.add('hiding_class')
+            $(recruit_info).addClass("hiding_class");
+            pocket_bar.classList.remove('hiding_class');
         },
         success: function (response) {
+            $(recruit_info).removeClass("hiding_class");
             let id_jobs = response['id_jobs'];
             // console.log(id_jobs.length)
-            if (id_jobs.length === 0){
+            if (id_jobs.length === 0) {
                 alert('일치하는 정보가 없습니다.');
                 None_info.classList.remove('hiding_class')
                 loadingbar.classList.add('hiding_class')
+                $(recruit_info).addClass("hiding_class");
+                pocket_bar.classList.remove('hiding_class');
             }
-            
+
 
 
             for (let i = 0; i < id_jobs.length; i++) {
@@ -217,19 +242,16 @@ function indeed_jobs_give(input_keyword, input_location, input_jobtype) {
                         </div>
                     </div>
                     <div id="recruit_post_link">
-
                         <div id="support_btn">
                             <a href="${link}">
                                 <button>지원하기</button>
                             </a>
                         </div>
-
                         <div id="like_btn">
                             <a>
                                 <button class="pink_btn" id="like_click" onclick="handleClick_like('${company}', '${link}')">찜</button>
                             </a>
                         </div>
-
                     </div>
                 </div>
             </div>`;
@@ -238,7 +260,7 @@ function indeed_jobs_give(input_keyword, input_location, input_jobtype) {
                 jobs_potal.innerText = 'Indeed의 채용정보';
                 loadingbar.classList.add('hiding_class');
                 pocket_bar.classList.remove('hiding_class');
-                
+
 
             }
         }
@@ -250,17 +272,22 @@ function indeed_jobs_give(input_keyword, input_location, input_jobtype) {
 function saramin_jobs_give(input_keyword, input_location, input_jobtype) {
     None_info.classList.add('hiding_class');
     loadingbar.classList.remove('hiding_class');
+    $(recruit_info).addClass("hiding_class");
+    pocket_bar.classList.add('hiding_class');
     $('#total_recruit_info').empty()
     $.ajax({
         type: "GET",
         url: `/api/saramin?input_keyword_give=` + input_keyword + `&input_location_give=` + input_location + `&input_jobtype_give=` + input_jobtype,
         data: {},
-        error : function(){
+        error: function () {
             alert('일치하는 정보가 없습니다.');
             None_info.classList.remove('hiding_class')
             loadingbar.classList.add('hiding_class')
+            $(recruit_info).addClass("hiding_class");
+            pocket_bar.classList.remove('hiding_class');
         },
         success: function (response) {
+            $(recruit_info).removeClass("hiding_class");
             let sa_jobs = response['sa_jobs'];
             for (let i = 0; i < sa_jobs.length; i++) {
                 let r_sa_jobs = sa_jobs[i]
@@ -295,19 +322,16 @@ function saramin_jobs_give(input_keyword, input_location, input_jobtype) {
                         </div>
                     </div>
                     <div id="recruit_post_link">
-
                         <div id="support_btn">
                             <a href="${link}">
                                 <button>지원하기</button>
                             </a>
                         </div>
-
                         <div id="like_btn">
                             <a>
                             <button class="pink_btn" id="like_click" onclick="handleClick_like('${company}', '${link}')">찜</button>
                             </a>
                         </div>
-
                     </div>
                 </div>
             </div>`;
@@ -316,6 +340,7 @@ function saramin_jobs_give(input_keyword, input_location, input_jobtype) {
                 jobs_potal.innerText = 'Saram-in의 채용정보';
                 loadingbar.classList.add('hiding_class');
                 pocket_bar.classList.remove('hiding_class');
+
             }
         }
     })
@@ -325,17 +350,22 @@ function saramin_jobs_give(input_keyword, input_location, input_jobtype) {
 function job_korea_jobs_give(input_keyword, input_location, input_jobtype) {
     None_info.classList.add('hiding_class');
     loadingbar.classList.remove('hiding_class');
+    $(recruit_info).addClass("hiding_class");
+    pocket_bar.classList.add('hiding_class');
     $('#total_recruit_info').empty()
     $.ajax({
         type: "GET",
         url: `/api/job_korea?input_keyword_give=` + input_keyword + `&input_location_give=` + input_location + `&input_jobtype_give=` + input_jobtype,
         data: {},
-        error : function(){
+        error: function () {
             alert('일치하는 정보가 없습니다.');
             None_info.classList.remove('hiding_class')
             loadingbar.classList.add('hiding_class')
+            $(recruit_info).addClass("hiding_class");
+            pocket_bar.classList.remove('hiding_class');
         },
         success: function (response) {
+            $(recruit_info).removeClass("hiding_class");
             let jk_jobs = response['jk_jobs'];
             for (let i = 0; i < jk_jobs.length; i++) {
                 let r_jk_jobs = jk_jobs[i]
@@ -370,19 +400,16 @@ function job_korea_jobs_give(input_keyword, input_location, input_jobtype) {
                         </div>
                     </div>
                     <div id="recruit_post_link">
-
                         <div id="support_btn">
                             <a href="${link}">
                                 <button>지원하기</button>
                             </a>
                         </div>
-
                         <div id="like_btn">
                             <a>
                             <button class="pink_btn" id="like_click" onclick="handleClick_like('${company}', '${link}')">찜</button>
                             </a>
                         </div>
-
                     </div>
                 </div>
             </div>`;
@@ -391,6 +418,7 @@ function job_korea_jobs_give(input_keyword, input_location, input_jobtype) {
                 jobs_potal.innerText = 'Job-korea의 채용정보';
                 loadingbar.classList.add('hiding_class');
                 pocket_bar.classList.remove('hiding_class');
+
             }
         }
     })
@@ -400,17 +428,22 @@ function job_korea_jobs_give(input_keyword, input_location, input_jobtype) {
 function job_total_give(input_keyword, input_location, input_jobtype) {
     None_info.classList.add('hiding_class');
     loadingbar.classList.remove('hiding_class');
+    $(recruit_info).addClass("hiding_class");
+    pocket_bar.classList.add('hiding_class');
     $('#total_recruit_info').empty()
     $.ajax({
         type: "GET",
         url: `/api/total?input_keyword_give=` + input_keyword + `&input_location_give=` + input_location + `&input_jobtype_give=` + input_jobtype,
         data: {},
-        error : function(){
+        error: function () {
             alert('일치하는 정보가 없습니다.');
             None_info.classList.remove('hiding_class')
             loadingbar.classList.add('hiding_class')
+            $(recruit_info).addClass("hiding_class");
+            pocket_bar.classList.remove('hiding_class');
         },
         success: function (response) {
+            $(recruit_info).removeClass("hiding_class");
             let jk_jobs = response['jk_jobs'];
             let id_jobs = response['id_jobs'];
             let sa_jobs = response['sa_jobs'];
@@ -448,19 +481,16 @@ function job_total_give(input_keyword, input_location, input_jobtype) {
                         </div>
                     </div>
                     <div id="recruit_post_link">
-
                         <div id="support_btn">
                             <a href="${link}">
                                 <button>지원하기</button>
                             </a>
                         </div>
-
                         <div id="like_btn">
                             <a>
                             <button class="pink_btn" id="like_click" onclick="handleClick_like('${company}', '${link}')">찜</button>
                             </a>
                         </div>
-
                     </div>
                 </div>
             </div>`;
@@ -469,6 +499,7 @@ function job_total_give(input_keyword, input_location, input_jobtype) {
                 jobs_potal.innerText = '전체포탈의 채용정보';
                 loadingbar.classList.add('hiding_class');
                 pocket_bar.classList.remove('hiding_class');
+
             }
 
             for (let i = 0; i < sa_jobs.length; i++) {
@@ -504,19 +535,16 @@ function job_total_give(input_keyword, input_location, input_jobtype) {
                         </div>
                     </div>
                     <div id="recruit_post_link">
-
                         <div id="support_btn">
                             <a href="${link}">
                                 <button>지원하기</button>
                             </a>
                         </div>
-
                         <div id="like_btn">
                             <a>
                             <button class="pink_btn" id="like_click" onclick="handleClick_like('${company}', '${link}')">찜</button>
                             </a>
                         </div>
-
                     </div>
                 </div>
             </div>`;
@@ -556,19 +584,16 @@ function job_total_give(input_keyword, input_location, input_jobtype) {
                         </div>
                     </div>
                     <div id="recruit_post_link">
-
                         <div id="support_btn">
                             <a href="${link}">
                                 <button>지원하기</button>
                             </a>
                         </div>
-
                         <div id="like_btn">
                             <a>
                             <button class="pink_btn" id="like_click" onclick="handleClick_like('${company}', '${link}')">찜</button>
                             </a>
                         </div>
-
                     </div>
                 </div>
             </div>`;
@@ -582,11 +607,13 @@ function print_like(like) {
     let like_company_LS = like['like_company']
     let like_link_LS = like['like_link']
 
-    let like_html = `<li>
+    let like_html = `<li id="like_list_li">
                         <a href="${like_link_LS}">
-                            <span id="like_list_span">
-                                ${like_company_LS}
-                            </span>
+                            <div id="like_list_span">
+                                <span>
+                                    ${like_company_LS}
+                                </span>
+                            </div>
                         </a>
                          <button id="like_del_btn" onclick="like_del('${like_company_LS}', '${like_link_LS}')">
                             ❌
@@ -636,4 +663,3 @@ function init() {
     // Indeed_logo.addEventListener("click", handleClick_Indeed);
 }
 init();
-

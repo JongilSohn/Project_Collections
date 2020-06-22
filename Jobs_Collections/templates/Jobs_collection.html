@@ -42,13 +42,10 @@
 
     <!-- <script>
         // const loadingbar_news = document.querySelector('#loadingbar_news')
-
         $(document).ready(function () {
             news_readey();
             console.log('준비완료')
         });
-
-
         function news_readey() {
             $('#recruit_news').empty()
             $.ajax({
@@ -59,12 +56,10 @@
                     let news_card = response['news_card'];
                     for (let i = 0; i < news_card.length; i++) {
                         let r_news_card = news_card[i]
-
                         let news_content = r_news_card['news_content']
                         let news_link = r_news_card['news_link']
                         let news_img = r_news_card['news_img']
                         let news_title = r_news_card['news_title']
-
                         let temp_html = `<div id="news_box">
                                           <a href="${news_link}" class="news_class">
                                               <div id="news_img">
@@ -92,10 +87,10 @@
     <style type="text/css">
         #fixedbtn {
             position: fixed;
-            right: 93px;
-            bottom: 50px;
+            right: 111px;
+            bottom: 95px;
             z-index: 1000;
-            width: 120px;
+            width: 80px;
             border-radius: 100%;
             border: 2px solid black;
         }
@@ -215,24 +210,20 @@
                 <div id="recruit_info_number">
                     <h4>채용정보 갯수</h4>
                 </div>
+            </div>
 
 
 
-
-                <div id="loadingbar_center">
-
-                    <div class="loadingio-spinner-spin-87fuqmn8sh4"><div class="ldio-dmlkq2kuyw">
-                        <div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div>
-                        </div></div>
-
-                </div>
-
-                <div id="None_info" class="hiding_class">
-                    <h1>일치하는 채용 정보가 없습니다.</h1>
-                </div>
+            <div id="loadingbar_center">
+                <div class="loadingio-spinner-spin-87fuqmn8sh4"><div class="ldio-dmlkq2kuyw">
+                    <div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div>
+                    </div></div>
+            </div>
 
 
 
+            <div id="None_info" class="hiding_class">
+                <h1>일치하는 채용 정보가 없습니다.</h1>
             </div>
 
             <div id="total_recruit_info">
