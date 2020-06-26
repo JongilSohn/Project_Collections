@@ -196,14 +196,149 @@
 #     print(' '*(n-i)+''+'*'*i)         # ''사이에 넣는 이유는 ''을 넣지 않으면 공백이 1칸 생긴다.
 
 # ========================================
-# 백준 For문 # 10871 번 --> O
+# 백준 For문 # 10871 번 --> X
+# import sys
+
+# a ,b = map(int, sys.stdin.readline().rstrip().split())
+
+# str = list(map(int, sys.stdin.readline().rstrip().split())) # list()를 사용하여 입력받은 값을 리스트에 넣는다.
+
+# for i in str:
+#     if i < b:
+#         print(i,end=' ')        # end=' '를 쓰게되면 줄바꿈이 되지 않고 출력한 다음  출력1end출력2 이런식으로 출력된다.
+
+# ========================================
+# 백준 While문 # 10952 번 --> X
+
+# import sys
+
+# while True:       #while 조건문: 실행문 이런식으로 오면 조건이 만족될때까지 무한으로 돈다.
+#     a, b = map(int, sys.stdin.readline().rstrip().split())
+#     if a==0 and b==0:
+#         break 
+    
+#     print(a+b)
+
+#     import sys
+
+#     # if a==0 and b==0:         # 아래에 하면 안되는 이유는 0 0이 찍혔을때 출력이 0이 나오지 않은채로 끝나야 하기 때문이다.
+#     #     break 
+    
+# ========================================
+# 백준 While문 # 10951 번 --> X
+
+# import sys
+
+# while True:
+#     try:
+#         a, b = map(int, sys.stdin.readline().rstrip().split())
+#         print(a+b)
+#     except:                         #except 처리를 하지 않으면 끊임없이 input을 받게된다. 근데 무슨말인지????
+#         break
+
+# ========================================
+# 백준 While문 # 10951 번 --> O X
+
+# import sys        #이중 While문을 사용하여 계산했다.
+
+# while True:
+#     n = int(sys.stdin.readline().rstrip())        
+#     x = n         #입력받은 변수를 x에 넣는다.
+#     a = int(n//10)    
+#     b = int(n%10)
+#     c = int(1)
+
+#     n = (b*10) + ((a+b)%10)
+#     if n != x:
+#         while n!=x:
+#             a = int(n//10)
+#             b = int(n%10)
+#             n = (b*10) + ((a+b)%10)
+#             c += 1
+#     print(c)
+#     break
+
+# ========================================
+# 백준 실습1 # 10039 번 --> O
+
+# import sys
+
+# list = []
+
+# for n in range(5):
+#     n = int(sys.stdin.readline().rstrip())
+#     if n<40:
+#         n=40
+#     list.append(n)
+
+# print(int(sum(list)/len(list)))
+
+# ========================================
+# 백준 실습1 # 5543 번 --> O
+
+# import sys
+
+# buger = []
+# drink = []
+
+# for b in range(3):
+#     b = int(sys.stdin.readline().rstrip())
+#     buger.append(b)
+
+# for d in range(2):
+#     d = int(sys.stdin.readline().rstrip())
+#     drink.append(d)
+# buger.sort()
+# drink.sort()
+# print(buger[0]+drink[0]-50)
+
+# ========================================
+# 백준 실습1 # 10817 번 --> O
+
+# import sys
+
+# lis = []
+# a, b, c = map(int, sys.stdin.readline().rstrip().split())
+# lis.append(a)
+# lis.append(b)
+# lis.append(c)
+# lis.sort()
+# print(lis[1])
+
+# ========================================
+# 백준 실습1 # 2523 번 --> O
+
+# import sys
+
+# n = int(sys.stdin.readline().rstrip())
+
+# for a in range(n):
+#     print('*'*(a+1))
+# for b in range(n-1, 0, -1):
+#     print('*'*(b))
+
+# ========================================
+# 백준 실습1 # 2446 번 --> O
+
+# import sys
+
+# n = int(sys.stdin.readline().rstrip())
+
+# for a in range(n, 0, -1):
+#     print(' '*(n-a)+'*'*(2*a-1))                  # +로 안하고 , 로 하면 틀렸다. 이유는 모르겠지만.. 꼭 +로 해라
+# for b in range(n-1):
+#     print(' '*(n-b-2)+'*'*(2*b+3))
+
+# ========================================
+# 백준 실습1 # 2446 번 --> O
+
 import sys
 
-a ,b = map(int, sys.stdin.readline().rstrip().split())
-lis = []
+n = int(sys.stdin.readline().rstrip())
 
-for i in range(a):
-    x = int(sys.stdin.readline().strip())
-    if b < x:
-        lis.append(x)
-print(x)
+for a in range(2*n):
+    if (a+1)%2 == 0 :
+        
+
+
+
