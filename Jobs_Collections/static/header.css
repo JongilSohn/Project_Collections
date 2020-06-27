@@ -165,25 +165,34 @@
     font-size: 20px;
 }
 
-#like_list_span{
-    width: 110px;
+.like_list_span{
+    width: 150px;
     height: 21px;
-    /* height: 24px; */
-    overflow: hidden;
+    line-height: 21px;
+    /* overflow: hidden; */
     /* white-space: normal; */
+    margin: 3px;
+
+}
+
+.sub_like_list_span{
+    overflow: hidden;
+    width: 122px;
     text-overflow: ellipsis;
+    height: 21px;
+    line-height: 28px;
     /* display: inline-block; */
     display: inline-block;
+    overflow:hidden;
+    white-space:nowrap;
+    float: left;
 }
 
-#like_list_li{
-    
-}
 
-#like_del_btn{
+
+.like_del_btn{
     float: right;
-    height: 21px;
+    height: 24px;
     font-size: 1px;
-    margin: 0px 15px 0px 0px;
     border-radius: 10%;
 }

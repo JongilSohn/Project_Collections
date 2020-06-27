@@ -47,7 +47,7 @@ let like_list_ar = []
 
 function like_del(del_company, del_link) {
     const del_btn = event.target;
-    const li = del_btn.parentNode;
+    const li = del_btn.parentNode.parentNode;
     like_list.removeChild(li);
 
     localStorage.removeItem('test');
@@ -95,19 +95,21 @@ function handleClick_like(like_company, like_link) {
     }
     else {
 
-        if (like_list_ar.length < 24) {
-            let like_html = `<li id="like_list_li">
-                        <a href="${like_link}">
-                            <div id="like_list_span">
-                                <span>
-                                    ${like_company}
-                                </span>
-                            </div>
-                        </a>
-                            <button id="like_del_btn" onclick="like_del('${like_company}', '${like_link}')">
-                                 ❌
-                            </button>
-                    </li>`;
+        if (like_list_ar.length < 18) {
+            let like_html = `<li class="like_list_li">
+                                <div class="like_list_span">
+                                    <a href="${like_link}">
+                                        <div class="sub_like_list_span">
+                                        <span>
+                                            ${like_company}
+                                        </span>
+                                        </div>
+                                    </a>
+                                    <button class="like_del_btn" onclick="like_del('${like_company}', '${like_link}')">
+                                     ❌
+                                    </button>
+                                </div>
+                            </li>`;
             // like_list.append(like_html);
             $('#like_list').append(like_html);
 
@@ -120,7 +122,7 @@ function handleClick_like(like_company, like_link) {
             save_like_list();
         }
         else {
-            alert("관심기업은 최대 23개까지만 등록 가능합니다.")
+            alert("관심기업은 최대 18개까지만 등록 가능합니다.")
 
         }
     }
@@ -184,6 +186,7 @@ function indeed_jobs_give(input_keyword, input_location, input_jobtype) {
     loadingbar.classList.remove('hiding_class');
     pocket_bar.classList.add('hiding_class');
     $(recruit_info).addClass("hiding_class");
+    $('.balloon').addClass("hiding_class");
     $('#total_recruit_info').empty()
     $.ajax({
         type: "GET",
@@ -274,6 +277,7 @@ function saramin_jobs_give(input_keyword, input_location, input_jobtype) {
     loadingbar.classList.remove('hiding_class');
     $(recruit_info).addClass("hiding_class");
     pocket_bar.classList.add('hiding_class');
+    $('.balloon').addClass("hiding_class");
     $('#total_recruit_info').empty()
     $.ajax({
         type: "GET",
@@ -352,6 +356,7 @@ function job_korea_jobs_give(input_keyword, input_location, input_jobtype) {
     loadingbar.classList.remove('hiding_class');
     $(recruit_info).addClass("hiding_class");
     pocket_bar.classList.add('hiding_class');
+    $('.balloon').addClass("hiding_class");
     $('#total_recruit_info').empty()
     $.ajax({
         type: "GET",
@@ -430,6 +435,7 @@ function job_total_give(input_keyword, input_location, input_jobtype) {
     loadingbar.classList.remove('hiding_class');
     $(recruit_info).addClass("hiding_class");
     pocket_bar.classList.add('hiding_class');
+    $('.balloon').addClass("hiding_class");
     $('#total_recruit_info').empty()
     $.ajax({
         type: "GET",
@@ -607,18 +613,21 @@ function print_like(like) {
     let like_company_LS = like['like_company']
     let like_link_LS = like['like_link']
 
-    let like_html = `<li id="like_list_li">
-                        <a href="${like_link_LS}">
-                            <div id="like_list_span">
-                                <span>
-                                    ${like_company_LS}
-                                </span>
-                            </div>
-                        </a>
-                         <button id="like_del_btn" onclick="like_del('${like_company_LS}', '${like_link_LS}')">
-                            ❌
-                         </button>
-                    </li>`;
+    let like_html = 
+                    `<li class="like_list_li">
+                                <div class="like_list_span">
+                                    <a href="${like_link_LS}">
+                                        <div class="sub_like_list_span">
+                                        <span>
+                                            ${like_company_LS}
+                                        </span>
+                                        </div>
+                                    </a>
+                                    <button class="like_del_btn" onclick="like_del('${like_company_LS}', '${like_link_LS}')">
+                                     ❌
+                                    </button>
+                                </div>
+                            </li>`;
     // like_list.append(like_html);
     $('#like_list').append(like_html);
 
