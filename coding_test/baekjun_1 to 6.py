@@ -117,7 +117,7 @@
 
 # n = int(input())
 
-# for i in range(1, 10):
+# for i in (1, 10):
 #     print(n, '*', i, '=', n*i)
 
 # ========================================
@@ -259,6 +259,45 @@
 #     break
 
 # ========================================
+# 백준 실습1 # 10818 번 --> O
+
+# import sys
+
+# n = int(sys.stdin.readline().rstrip())
+# a = list(map(int, sys.stdin.readline().rstrip().split()))
+
+# print(min(a), max(a))
+
+# ========================================
+# 백준 실습1 # 2562 번 --> O
+
+# import sys
+# b = []
+
+# for a in range(9):
+#     i = int(sys.stdin.readline().rstrip())
+#     b.append(int(i))
+# print(max(b))
+# print(b.index(max(b))+1)
+
+# ========================================
+# 백준 실습1 # 2577 번 --> O
+
+# import sys
+
+# a = int(sys.stdin.readline().rstrip())
+# b = int(sys.stdin.readline().rstrip())
+# c = int(sys.stdin.readline().rstrip())
+# x = (a*b*c)
+# li = []
+# for y in str(x):
+#     li.append(y)
+
+# for e in range(10):
+#     print(li.count(str(e)))
+
+
+# ========================================
 # 백준 실습1 # 10039 번 --> O
 
 # import sys
@@ -330,15 +369,16 @@
 #     print(' '*(n-b-2)+'*'*(2*b+3))
 
 # ========================================
-# 백준 실습1 # 2446 번 --> O
+# 백준 실습1 # 4344 번 --> X
 
-import sys
+# import sys
 
-n = int(sys.stdin.readline().rstrip())
+# n = int(sys.stdin.readline().rstrip())
+# for x in range(n):
+#     a = list(map(float, sys.stdin.readline().rstrip().split()))
+#     c = 0
+#     for y in range(1, len(a)):
+#         if a[y] > sum(a[1:])/(len(a)-1):
+#             c += 1
 
-for a in range(2*n):
-    if (a+1)%2 == 0 :
-        
-
-
-
+#     print("%.3f" % (c/a[0]*100)+"%")              ########    반올림에 대해서 공부가 더 필요하다....!!!!!!!!!!!!!!!별별별
