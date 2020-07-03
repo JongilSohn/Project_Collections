@@ -57,6 +57,8 @@ arr = []
 for a in range(n):
     x = list(map(int, sys.stdin.readline().rstrip().split()))
     arr.append(x)
-print(arr.sort())
 
+arr = sorted(arr, key=lambda x:(x[1], x[0]))        #가장 빨리 끝나는 회의 먼저 정렬시키고, 같다면 먼저 시작하는 회의를 우선.
+
+print(arr)
 
