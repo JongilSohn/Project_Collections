@@ -893,3 +893,260 @@
 
 # mul = a*b*c*d/8/1024/1024
 # print('%.1f' %mul, 'MB')
+
+
+
+##########################################
+# 코드업 기초 100제 - 1086 번   ->  X??????????????
+
+# import sys
+
+# a, b, c = map(float, sys.stdin.readline().rstrip().split())
+
+# mul = a*b*c/8/1024
+# print(mul)
+# # print('%.3f' %mul, 'MB')
+
+
+
+##########################################
+# 코드업 기초 100제 - 1087 번   ->  O
+
+# import sys
+
+# n = int(sys.stdin.readline().rstrip())
+
+# sum = 0
+
+# for a in range(n+1):
+#     sum += a
+#     if sum >= n:
+#         print(sum)
+#         break
+
+
+
+##########################################
+# 코드업 기초 100제 - 1088 번   ->  O
+
+# import sys
+
+# n = int(sys.stdin.readline().rstrip())
+
+# for a in range(1, n+1):
+#     if a%3 != 0:
+#         print(a, end=' ')
+
+
+
+##########################################
+# 코드업 기초 100제 - 1089 번   ->  O
+
+# import sys
+
+# a, b, c = map(int, sys.stdin.readline().rstrip().split())
+
+# for x in range(c-1):
+#     a += b
+# print(a)
+
+
+##########################################
+# 코드업 기초 100제 - 1090 번   ->  O
+
+# import sys
+
+# a, b, c = map(int, sys.stdin.readline().rstrip().split())
+
+# for x in range(c-1):
+#     a *= b
+# print(a)
+
+
+
+##########################################
+# 코드업 기초 100제 - 1091 번   ->  O
+
+# import sys
+
+# a, b, c, d = map(int, sys.stdin.readline().rstrip().split())
+
+# for x in range(d-1):
+#     a = a*b+c
+# print(a)
+
+
+
+##########################################
+# 코드업 기초 100제 - 1092 번   ->  O
+
+# import sys
+
+# a, b, c = map(int, sys.stdin.readline().rstrip().split())
+# day = 1
+# while True:
+#     day += 1
+#     if day%a == 0 and day%b == 0 and day%c ==0 :
+#         print(day)
+#         break
+
+
+
+##########################################
+# 코드업 기초 100제 - 1093 번   ->  O
+
+# import sys
+
+# n = int(sys.stdin.readline().rstrip())
+# a = list(map(int, sys.stdin.readline().rstrip().split()))
+
+# for x in range(1,24):
+#     print(a.count(x), end=' ')                    # count 함수를 사용하여 중복값의 갯수를 출력.
+
+
+
+##########################################
+# 코드업 기초 100제 - 1094 번   ->  O
+
+# import sys
+
+# n = int(sys.stdin.readline().rstrip())
+
+# a = list(map(int, sys.stdin.readline().rstrip().split()))
+
+# for x in range(len(a), 0, -1):
+#     print(a[x-1], end=' ')
+
+
+
+##########################################
+# 코드업 기초 100제 - 1095 번   ->  O
+
+# import sys
+
+# n = int(sys.stdin.readline().rstrip())
+# a = list(map(int, sys.stdin.readline().rstrip().split()))
+# a.sort()
+
+# print(a[0])
+
+
+
+##########################################
+# 코드업 기초 100제 - 1096 번   ->  X
+
+# import sys
+# n = int(sys.stdin.readline().rstrip())
+
+# arr = [[0 for i in range(20)] for j in range(20)]                    ####### 2차월 배열에 쉽게 넣는 방법 아주 중요하다!!!!!!!☆★
+
+# for x in range(n):
+#     a, b = map(int, sys.stdin.readline().rstrip().split())
+#     arr[a][b] = 1
+
+# for r in range(1, 20):
+#     for e in range(1, 20):
+#         print(arr[r][e], end=' ')
+#     print('')
+
+
+
+##########################################
+# 코드업 기초 100제 - 1097 번   ->  X xXXXXXXXXXXXXXXXXXX
+
+# import sys
+
+# arr = [[0 for i in range(19)] for j in range(19)]  
+
+# for x in range(19):
+#     arr[x] = list(map(int, sys.stdin.readline().rstrip().split()))
+
+# n = int(sys.stdin.readline().rstrip())
+# for y in range(n):
+#     z = list(map(int, sys.stdin.readline().rstrip().split()))
+
+#     for q in range(19):
+#         if arr[q][z[0]-1] ==1 :
+#             arr[q][z[0]-1] =0
+#         else :
+#             arr[q][z[0]-1] =1
+        
+        
+#         if arr[z[1]-1][q] == 1:
+#             arr[z[1]-1][q] = 0
+#         else :
+#             arr[z[1]-1][q] ==1
+
+# for r in range(19):
+#     for e in range(19):
+#         print(arr[r][e], end=' ')
+#     print('')
+
+
+
+##########################################
+# 코드업 기초 100제 - 1098 번   ->  O
+
+# import sys
+
+# h, w = map(int, sys.stdin.readline().rstrip().split())
+# n = int(sys.stdin.readline().rstrip())
+
+# arr = [[0 for i in range(w)] for j in range(h)]
+
+# for stick in range(n):
+#     l, d, x, y = map(int, sys.stdin.readline().rstrip().split())
+#     if d  == 0 :
+#         for a in range(l):
+#             arr[x-1][y+a-1] = 1
+#     else :
+#         for a in range(l):
+#             arr[x+a-1][y-1] = 1
+
+# for r in range(h):
+#     for e in range(w):
+#         print(arr[r][e], end=' ')
+#     print('')
+
+
+
+##########################################
+# 코드업 기초 100제 - 1098 번   ->  X ######## 못풀었음...
+
+# import sys
+# arr = [[0 for i in range(10)] for j in range(10)]
+
+# for i in range(10):
+#     ant_map = list(map(int, sys.stdin.readline().rstrip().split()))
+#     arr[i] = ant_map
+
+# x=1
+# y=1
+# while True:
+#     print(y+1, x+1)
+#     if arr[y][x] == 0:
+#         arr[y][x] = 9
+#         x += 1
+#     elif arr[y+1][x] ==0 & arr[y][x+1] ==1:
+#         arr[y+1][x]=9
+#         x-=1
+#         y+=1
+    
+#     else:
+#         y+=1
+#         x-=1
+
+#     if arr[y][x] == 2:
+#         arr[y][x] = 9
+#         for r in range(10):
+#             for e in range(10):
+#                 print(arr[r][e], end=' ')
+#             print('')
+#         break
+
+    # if arr[y][x] == 9 and arr[y+1][x] ==1 and arr[y][x+1]:
+    #     for r in range(10):
+    #         for e in range(10):
+    #             print(arr[r][e], end=' ')
+    #         print('')
+    #     break
